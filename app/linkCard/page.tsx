@@ -22,7 +22,7 @@ const LinkCard: FC = () => {
     if (newLink.url && newLink.description) {
       setLinks([...links, { id: Date.now().toString(), ...newLink }]);
       setNewLink({ url: '', description: '', type: 'GitHub' });
-      setIsFormVisible(false); // Hide the form after adding
+      setIsFormVisible(false); 
     } else {
       alert('Please fill in all fields');
     }
@@ -37,7 +37,7 @@ const LinkCard: FC = () => {
     if (linkToEdit) {
       setNewLink({ url: linkToEdit.url, description: linkToEdit.description, type: linkToEdit.type });
       setIsFormVisible(true);
-      handleRemoveLink(id); // Remove the old link for updating
+      handleRemoveLink(id);
     }
   };
 

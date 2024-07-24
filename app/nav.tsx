@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import Image from 'next/image';
 
 interface NavbarProps {
   setActivePage: (page: 'home' | 'link' | 'profile') => void;
@@ -9,7 +10,7 @@ const Navbar: FC<NavbarProps> = ({ setActivePage }) => {
     <nav className="bg-white border-b border-gray-200 py-4">
       <div className="container mx-auto flex items-center justify-between px-4">
         <div className="flex items-center space-x-3">
-          <img
+          <Image
             src="/solar_link-circle.png"
             alt="Devlinks Icon"
             width={32}
@@ -21,7 +22,7 @@ const Navbar: FC<NavbarProps> = ({ setActivePage }) => {
 
         <div className="flex items-center space-x-6">
           <button onClick={() => setActivePage('link')} className="flex items-center text-gray-700 hover:text-gray-900">
-            <img
+            <Image
               src="/ph_link-bold.png"
               alt="Link Icon"
               width={20}
@@ -32,7 +33,7 @@ const Navbar: FC<NavbarProps> = ({ setActivePage }) => {
           </button>
 
           <button onClick={() => setActivePage('profile')} className="flex items-center text-gray-700 hover:text-gray-900">
-            <img
+            <Image
               src="/ph_user-circle-bold.png"
               alt="User Icon"
               width={20}

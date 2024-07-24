@@ -5,6 +5,7 @@ import Link from "next/link";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { app } from "@/lib/firebase";
+import Image from "next/image";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -34,7 +35,7 @@ export default function Register() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-background">
       <div className="flex items-center space-x-2 mb-12">
-        <img src="solar_link-circle.png" alt="Icon" className="w-8 h-8" />
+        <Image src="solar_link-circle.png" alt="Icon" className="w-8 h-8" />
         <h1 className="text-xl font-bold leading-tight tracking-tight text-text md:text-2xl ">
           devlinks
         </h1>
@@ -44,7 +45,7 @@ export default function Register() {
           <h1 className="text-xl font-bold leading-tight tracking-tight text-text md:text-2xl">
             Create account
           </h1>
-          <p>Let's get you started sharing your links!</p>
+          <p>Let&apos;s get you started sharing your links!</p>
           <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6" action="#">
             <div>
               <label

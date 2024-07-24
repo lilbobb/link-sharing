@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { app } from "@/lib/firebase";
+import Image from "next/image";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -39,7 +40,7 @@ export default function Login() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-8">
       <div className="flex items-center space-x-2 mb-12">
-        <img src="solar_link-circle.png" alt="Icon" className="w-8 h-8" />
+        <Image src="solar_link-circle.png" alt="Icon" className="w-8 h-8" />
         <h1 className="text-xl font-bold leading-tight tracking-tight text-text md:text-2xl ">
           devlinks
         </h1>
