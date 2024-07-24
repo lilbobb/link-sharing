@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { FC, useState } from 'react';
 import { FaGithub, FaYoutube, FaLinkedin } from 'react-icons/fa';
@@ -11,8 +11,7 @@ interface Link {
 }
 
 const initialLinks: Link[] = [
-  { id: '1', url: 'https://example.com', description: 'Example Link', type: 'GitHub' },
-];
+]
 
 const LinkCard: FC = () => {
   const [links, setLinks] = useState<Link[]>(initialLinks);
@@ -24,6 +23,8 @@ const LinkCard: FC = () => {
       setLinks([...links, { id: Date.now().toString(), ...newLink }]);
       setNewLink({ url: '', description: '', type: 'GitHub' });
       setIsFormVisible(false); // Hide the form after adding
+    } else {
+      alert('Please fill in all fields');
     }
   };
 
@@ -31,8 +32,13 @@ const LinkCard: FC = () => {
     setLinks(links.filter(link => link.id !== id));
   };
 
-  const handleEditLink = (id: string, updatedLink: { url: string; description: string; type: 'GitHub' | 'YouTube' | 'LinkedIn' }) => {
-    setLinks(links.map(link => (link.id === id ? { ...link, ...updatedLink } : link)));
+  const handleEditLink = (id: string) => {
+    const linkToEdit = links.find(link => link.id === id);
+    if (linkToEdit) {
+      setNewLink({ url: linkToEdit.url, description: linkToEdit.description, type: linkToEdit.type });
+      setIsFormVisible(true);
+      handleRemoveLink(id); // Remove the old link for updating
+    }
   };
 
   const renderIcon = (type: 'GitHub' | 'YouTube' | 'LinkedIn') => {
@@ -64,22 +70,22 @@ const LinkCard: FC = () => {
                     <p>{link.description}</p>
                   </div>
                 </div>
+                <button onClick={() => handleEditLink(link.id)} className="text-blue-600 hover:underline ml-4">
+                  Edit
+                </button>
                 <button onClick={() => handleRemoveLink(link.id)} className="text-red-600 hover:underline ml-4">
                   Remove
-                </button>
-                <button onClick={() => handleEditLink(link.id, { url: 'new_url', description: 'new_description', type: 'GitHub' })} className="text-blue-600 hover:underline ml-4">
-                  Edit
                 </button>
               </div>
             ))}
           </div>
 
           <div className="flex flex-col space-y-4 ml-8 w-full max-w-md">
-            <button 
-              onClick={() => setIsFormVisible(!isFormVisible)} 
+            <button
+              onClick={() => setIsFormVisible(!isFormVisible)}
               className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
             >
-              Add New Link
+              {isFormVisible ? 'Cancel' : 'Add New Link'}
             </button>
 
             {isFormVisible && (
@@ -98,6 +104,13 @@ const LinkCard: FC = () => {
                   placeholder="Link URL"
                   value={newLink.url}
                   onChange={(e) => setNewLink({ ...newLink, url: e.target.value })}
+                  className="mb-4 p-2 border border-gray-300 rounded-lg"
+                />
+                <input
+                  type="text"
+                  placeholder="Description"
+                  value={newLink.description}
+                  onChange={(e) => setNewLink({ ...newLink, description: e.target.value })}
                   className="mb-4 p-2 border border-gray-300 rounded-lg"
                 />
                 <button onClick={handleAddLink} className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
